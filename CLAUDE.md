@@ -20,7 +20,6 @@ pcep-python/
 ├── assets/
 │   ├── css/style.css    ← 全站樣式，顏色在最上面的 CSS 變數
 │   └── js/main.js       ← 導覽列、首頁卡片、目錄、測驗、執行 Python（IIFE，非 ES module）
-├── CHANGELOG.md
 └── .claude/commands/add-lesson.md
 ```
 
@@ -43,7 +42,6 @@ python3 -m http.server 8000   # 本地預覽，或直接點開 index.html
    ```
 4. 首頁卡片、導覽列、上一課/下一課、目錄都由 `main.js` 自動產生，不用改其他頁
 5. 用 `python3` 跑過每段範例，確認輸出跟測驗答案一致
-6. `CHANGELOG.md` 記一行
 
 ### 每課固定結構
 依序：`lesson-head`（標題）→ `goals`（學習目標 3-5 點）→ 觀念（`h2` 小節 `sec-1`、`h3` 觀念 `sec-1-1`）→ `traps`（常見陷阱，至少 3 個）→ `quiz`（小測驗，至少 5 題）→ `pager`（留空）。

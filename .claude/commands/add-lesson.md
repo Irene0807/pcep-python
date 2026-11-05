@@ -12,4 +12,3 @@ description: 新增一課講義（HTML 頁面 + lessons.js 資料）
 2. 依 `CLAUDE.md`「修改指引 > 新增一課」建立 `lessons/lesson-XX.html` 並更新 `data/lessons.js`
 3. 內容照「每課固定結構」與「元件寫法」
 4. 用 `python3` 驗證所有範例輸出
-5. 更新 `CHANGELOG.md`
