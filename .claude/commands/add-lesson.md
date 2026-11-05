@@ -1,10 +1,15 @@
 ---
-description: 照 CLAUDE.md 規則新增一課講義
+description: 新增一課講義（HTML 頁面 + lessons.js 資料）
 ---
 
-新增一課：$ARGUMENTS
+使用方式：`/add-lesson <講義檔或主題>`
 
-1. 先讀 `CLAUDE.md`，全部照它的規則
-2. 讀使用者給的講義 (PDF / pptx / 主題)，列小節跟重點給使用者確認
-3. 確認後照 CLAUDE.md 第 10 節流程做完 (複製 template、填內容、加 lessons.js、python3 驗證、瀏覽器檢查、CHANGELOG)
-4. 最後回報：新檔案路徑、幾個小節、幾個陷阱、幾題測驗
+例如：`/add-lesson PCEP_lesson4.pdf`
+
+執行步驟：
+
+1. 讀講義，列出小節與重點給使用者確認
+2. 依 `CLAUDE.md`「修改指引 > 新增一課」建立 `lessons/lesson-XX.html` 並更新 `data/lessons.js`
+3. 內容照「每課固定結構」與「元件寫法」
+4. 用 `python3` 驗證所有範例輸出
+5. 更新 `CHANGELOG.md`
