@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PCEP Python</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-root=".." data-lesson="lesson-01">
+  <nav class="navbar">
+    <div class="container">
+      <a class="logo" href="../index.html">PCEP <span>Python</span></a>
+      <div class="nav-links"></div>
+    </div>
+  </nav>
+
+  <div class="container lesson-layout">
+    <aside class="toc"></aside>
+
+    <article class="lesson-body">
+      <header class="lesson-head">
+        <div class="block-tag"></div>
+        <h1>Python 基礎</h1>
+        <p>程式怎麼跑起來、Python 有哪些資料型態、運算子誰先算、怎麼輸入輸出</p>
+      </header>
+
+      <section class="goals">
+        <h2>這課學完會</h2>
+        <ul>
+          <li>分得出編譯 vs 直譯</li>
+          <li>認得 5 種基本型態、4 種進位寫法</li>
+          <li>算對運算子優先級，尤其 <code>**</code> 跟 <code>//</code></li>
+          <li>會用 <code>print()</code> 的 <code>sep</code>、<code>end</code>，會做型態轉換</li>
+        </ul>
+      </section>
+
+      <h2 id="sec-1">1.1 基本名詞</h2>
+      <h3 id="sec-1-1">程式語言</h3>
+      <ul>
+        <li>自然語言：人講的話；機器語言：0 跟 1</li>
+        <li>Python 是高階語言，介在兩者中間</li>
+        <li>CPython：官方預設版本，用 C 寫的</li>
+        <li>名字來自英國喜劇 Monty Python's Flying Circus，不是蟒蛇</li>
+        <li>Console：直接跟 Python 一行一行互動；IDLE：內建的簡單編輯器；Script：存成 <code>.py</code> 的程式檔</li>
+      </ul>
+
+      <h3 id="sec-1-2">編譯 vs 直譯</h3>
+      <table>
+        <thead>
+          <tr><th scope="col"></th><th scope="col">編譯 Compilation</th><th scope="col">直譯 Interpreting</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">做法</th><td>全部翻完再執行</td><td>邊翻邊執行</td></tr>
+          <tr><th scope="row">例子</th><td>C / C++ (<code>.c</code> -> <code>.exe</code>)</td><td>Python (<code>.py</code>)</td></tr>
+          <tr><th scope="row">優點</th><td>執行快</td><td>寫完直接跑、好除錯、跨平台</td></tr>
+          <tr><th scope="row">缺點</th><td>編譯久、不好跨平台</td><td>每次都要翻，比較慢；錯誤跑到那行才發現</td></tr>
+        </tbody>
+      </table>
+
+      <h3 id="sec-1-3">lexis / syntax / semantics</h3>
+      <ul>
+        <li>lexis 詞彙：切得出合法的 token (英文：Bpple 不是字)</li>
+        <li>syntax 語法：符合規則 (英文：Love I you.)</li>
+        <li>semantics 語意：有意義 (英文：I am a apple.)</li>
+      </ul>
+      <pre class="py run">
+# 語法都對，跑到第 2 行才出事 -> semantics 錯
+print("start")
+print(10 / 0)
+</pre>
+
+      <h2 id="sec-2">1.2 程式結構</h2>
+      <h3 id="sec-2-1">keyword、縮排、註解</h3>
+      <ul>
+        <li>keyword 保留字不能當變數名稱，用 <code>keyword.iskeyword()</code> 查</li>
+        <li>縮排決定區塊，建議 4 個空格</li>
+        <li>單行註解 <code>#</code>，VS Code 選多行按 <code>ctrl + /</code></li>
+      </ul>
+      <pre class="py run">
+import keyword
+print(keyword.iskeyword("for"))
+print(keyword.iskeyword("hello"))
+print(len(keyword.kwlist), "keywords")
+</pre>
+
+      <h2 id="sec-3">1.3 資料型態與進位</h2>
+      <h3 id="sec-3-1">5 種基本型態</h3>
+      <ul>
+        <li>int：<code>1000</code>、<code>-5</code>、<code>0</code></li>
+        <li>float：<code>25.5</code>、科學記號 <code>3e8</code> = 3 * 10^8</li>
+        <li>str：<code>"56"</code></li>
+        <li>bool：<code>True</code>、<code>False</code> (首字大寫)</li>
+        <li>None：什麼都沒有</li>
+      </ul>
+      <pre class="py run">
+print("5" + "6")
+print(5 + 6)
+print(3e8, type(3e8))
+print(type(None))
+</pre>
+
+      <h3 id="sec-3-2">4 種進位</h3>
+      <ul>
+        <li>十進位：<code>26</code></li>
+        <li>二進位 <code>0b</code>：<code>0b11010</code></li>
+        <li>八進位 <code>0o</code>：<code>0o32</code></li>
+        <li>十六進位 <code>0x</code>：<code>0x1A</code> (每位 0-9 + A-F)</li>
+      </ul>
+      <pre class="py run">
+print(0b11010, 0o32, 0x1A)
+print(bin(26), oct(26), hex(26))
+</pre>
+
+      <h3 id="sec-3-3">變數命名</h3>
+      <ul>
+        <li>只能有英文、數字、底線 <code>_</code></li>
+        <li>不能數字開頭、大小寫有差、不能用 keyword</li>
+        <li>PEP 8：變數小寫加底線 <code>max_size</code>、常數全大寫 <code>PI</code>、class 字首大寫 <code>MyClass</code></li>
+        <li>PEP 8：運算子左右空格、縮排 4 格 (建議，不是強制)</li>
+      </ul>
+
+      <h2 id="sec-4">1.4 運算子</h2>
+      <h3 id="sec-4-1">數學運算</h3>
+      <ul>
+        <li><code>**</code> 次方，由右往左算</li>
+        <li><code>/</code> 一定得到 float；<code>//</code> 整除 (往負無限大取整)；<code>%</code> 餘數</li>
+        <li>優先級：<code>()</code> &gt; <code>**</code> &gt; 正負號 &gt; <code>* / // %</code> &gt; <code>+ -</code></li>
+      </ul>
+      <pre class="py run">
+print(2 ** 3 ** 2)
+print(10 / 2, 7 // 2, 7 % 2)
+print(-2 ** 2)
+print(2 + 3 * 4 ** 2)
+</pre>
+
+      <h3 id="sec-4-2">字串、比較、布林</h3>
+      <ul>
+        <li>字串：<code>+</code> 接起來、<code>*</code> 重複</li>
+        <li>比較：<code>== != &gt; &lt; &gt;= &lt;=</code>，結果是 bool</li>
+        <li>布林：<code>not</code> &gt; <code>and</code> &gt; <code>or</code></li>
+        <li>總優先級：數學 &gt; 比較 &gt; 布林</li>
+      </ul>
+      <pre class="py run">
+print("a" * 3 + "b" * 2)
+print(3 > 2 and not 1 == 1)
+print(True or False and False)
+</pre>
+
+      <h3 id="sec-4-3">位元運算</h3>
+      <ul>
+        <li><code>&amp;</code> 兩邊都 1、<code>|</code> 一邊是 1、<code>^</code> 不一樣才 1</li>
+        <li><code>~x</code> = <code>-x - 1</code></li>
+        <li><code>&lt;&lt; n</code> 左移 = 乘 2^n、<code>&gt;&gt; n</code> 右移 = 除 2^n 取整</li>
+      </ul>
+      <pre class="py run">
+a, b = 0b0011, 0b0101
+print(a &amp; b, a | b, a ^ b)
+print(~25)
+print(25 &lt;&lt; 2, 25 &gt;&gt; 2)
+</pre>
+
+      <h3 id="sec-4-4">float 精準度</h3>
+      <ul>
+        <li>float 用二進位存，只是很接近的值</li>
+        <li>比較 float 不要直接 <code>==</code></li>
+      </ul>
+      <pre class="py run">
+print(0.1 + 0.2)
+print(0.1 + 0.2 == 0.3)
+print(round(0.1 + 0.2, 2) == 0.3)
+</pre>
+
+      <h2 id="sec-5">1.5 輸入輸出</h2>
+      <h3 id="sec-5-1">print()</h3>
+      <ul>
+        <li><code>print(*objects, sep=" ", end="\n")</code></li>
+        <li>sep：中間用什麼隔，預設空格；end：結尾加什麼，預設換行</li>
+      </ul>
+      <pre class="py run">
+print("a", "b", "c")
+print("a", "b", "c", sep="-")
+print("no newline", end="!")
+print("next")
+</pre>
+
+      <h3 id="sec-5-2">input() 跟型態轉換</h3>
+      <ul>
+        <li><code>input()</code> 拿到的一定是 str，要算數字先轉</li>
+        <li><code>int()</code>、<code>float()</code>、<code>str()</code>、<code>bool()</code></li>
+        <li>bool 是 False 的：<code>0</code>、<code>0.0</code>、<code>""</code>、<code>None</code>、空的容器</li>
+      </ul>
+      <pre class="py run">
+x = input("number: ")
+print(type(x))
+print(int(x) * 2)
+</pre>
+      <pre class="py run">
+print(int(3.6), int("12"))
+print(float(3), float("12"), float(True))
+print(str(12.5), str(True))
+print(bool(0), bool("Hello"), bool(""), bool("    "))
+</pre>
+
+      <h2 id="traps">常見陷阱</h2>
+      <div class="trap">
+        <h4><code>**</code> 由右往左</h4>
+        <p><code>2 ** 3 ** 2</code> 先算 <code>3 ** 2</code>；負號比 <code>**</code> 慢，<code>-2 ** 2</code> 是 -4</p>
+        <pre class="py run">
+print(2 ** 3 ** 2, (2 ** 3) ** 2)
+print(-2 ** 2, (-2) ** 2)
+</pre>
+      </div>
+      <div class="trap">
+        <h4>負數的 <code>//</code> 跟 <code>%</code></h4>
+        <p><code>//</code> 往負無限大取，不是直接砍小數</p>
+        <pre class="py run">
+print(-7 // 2, int(-7 / 2))
+print(-7 % 3, 7 % -3)
+</pre>
+      </div>
+      <div class="trap">
+        <h4><code>int()</code> 轉不了小數字串</h4>
+        <p><code>int("3.6")</code> 會錯，要先 <code>float()</code></p>
+        <pre class="py run">
+print(int(float("3.6")))
+print(int("3.6"))
+</pre>
+      </div>
+      <div class="trap">
+        <h4>空白字串是 True</h4>
+        <p>只有完全空的 <code>""</code> 才是 False</p>
+        <pre class="py run">
+print(bool(" "), bool(""), bool("0"))
+</pre>
+      </div>
+
+      <h2 id="quiz">小測驗</h2>
+      <p class="score">點選項作答，會直接顯示對錯</p>
+
+      <div class="quiz" data-answer="B">
+        <p class="q">1. 下面程式會印出什麼？</p>
+        <pre class="py">
+print(2 ** 3 ** 2)
+</pre>
+        <ol class="options">
+          <li data-key="A">64</li>
+          <li data-key="B">512</li>
+          <li data-key="C">81</li>
+          <li data-key="D">Error</li>
+        </ol>
+        <p class="explain">解析：<code>**</code> 由右往左，3 ** 2 = 9，2 ** 9 = 512</p>
+      </div>
+
+      <div class="quiz" data-answer="B">
+        <p class="q">2. 下面程式會印出什麼？</p>
+        <pre class="py">
+print(-7 // 2)
+</pre>
+        <ol class="options">
+          <li data-key="A">-3</li>
+          <li data-key="B">-4</li>
+          <li data-key="C">-3.5</li>
+          <li data-key="D">3</li>
+        </ol>
+        <p class="explain">解析：-3.5 往負無限大取整 = -4</p>
+      </div>
+
+      <div class="quiz" data-answer="C">
+        <p class="q">3. 哪一個不是合法的變數名稱？</p>
+        <ol class="options">
+          <li data-key="A">_count</li>
+          <li data-key="B">count2</li>
+          <li data-key="C">2count</li>
+          <li data-key="D">Count</li>
+        </ol>
+        <p class="explain">解析：不能用數字開頭</p>
+      </div>
+
+      <div class="quiz" data-answer="D">
+        <p class="q">4. 下面程式會印出什麼？</p>
+        <pre class="py">
+print(0o17 + 0b11)
+</pre>
+        <ol class="options">
+          <li data-key="A">28</li>
+          <li data-key="B">20</li>
+          <li data-key="C">0o20</li>
+          <li data-key="D">18</li>
+        </ol>
+        <p class="explain">解析：0o17 = 1*8 + 7 = 15，0b11 = 3，15 + 3 = 18，print 印十進位</p>
+      </div>
+
+      <div class="quiz" data-answer="A">
+        <p class="q">5. 下面程式會印出什麼？</p>
+        <pre class="py">
+print("a", "b", sep="*", end="#")
+print("c")
+</pre>
+        <ol class="options">
+          <li data-key="A">a*b#c</li>
+          <li data-key="B">a*b#<br>c</li>
+          <li data-key="C">a b*#c</li>
+          <li data-key="D">ab*#c</li>
+        </ol>
+        <p class="explain">解析：sep 放在 a、b 中間，end 取代換行，所以 c 接在同一行</p>
+      </div>
+
+      <div class="quiz" data-answer="C">
+        <p class="q">6. 下面程式會印出什麼？</p>
+        <pre class="py">
+print(bool(" "), bool(0.0), float(True))
+</pre>
+        <ol class="options">
+          <li data-key="A">False False 1</li>
+          <li data-key="B">True True 1.0</li>
+          <li data-key="C">True False 1.0</li>
+          <li data-key="D">False False 1.0</li>
+        </ol>
+        <p class="explain">解析：空白字串不是空的 -> True；0.0 -> False；True 轉 float 是 1.0</p>
+      </div>
+
+      <nav class="pager"></nav>
+    </article>
+  </div>
+
+  <footer>
+    <div class="container">PCEP Python 入門講義</div>
+  </footer>
+
+  <script src="../data/lessons.js"></script>
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

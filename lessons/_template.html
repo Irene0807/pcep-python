@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PCEP Python</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<!-- 改 data-lesson，要跟 data/lessons.js 的 id 一樣 -->
+<body data-root=".." data-lesson="lesson-XX">
+  <nav class="navbar">
+    <div class="container">
+      <a class="logo" href="../index.html">PCEP <span>Python</span></a>
+      <div class="nav-links"></div>
+    </div>
+  </nav>
+
+  <div class="container lesson-layout">
+    <aside class="toc"></aside>
+
+    <article class="lesson-body">
+      <header class="lesson-head">
+        <div class="block-tag"></div>
+        <h1>課程標題</h1>
+        <p>一句話說這課在幹嘛</p>
+      </header>
+
+      <!-- 1. 學習目標：3-5 點 -->
+      <section class="goals">
+        <h2>這課學完會</h2>
+        <ul>
+          <li>目標 1</li>
+        </ul>
+      </section>
+
+      <!-- 2. 觀念：一個小節一個 h2，id 用 sec-1、sec-2...；底下的 h3 用 sec-1-1 -->
+      <h2 id="sec-1">X.1 小節名稱</h2>
+      <h3 id="sec-1-1">觀念名稱</h3>
+      <ul>
+        <li>重點，短句</li>
+      </ul>
+      <pre class="py run">
+print("hello")
+</pre>
+
+      <!-- 3. 常見陷阱：至少 3 個，每個都要有一段可以執行的程式 -->
+      <h2 id="traps">常見陷阱</h2>
+      <div class="trap">
+        <h4>陷阱標題</h4>
+        <p>一句話說哪裡會錯</p>
+        <pre class="py run">
+print(1)
+</pre>
+      </div>
+
+      <!-- 4. 小測驗：至少 5 題，4 個選項，data-answer 填正確選項 -->
+      <h2 id="quiz">小測驗</h2>
+      <p class="score">點選項作答，會直接顯示對錯</p>
+      <div class="quiz" data-answer="A">
+        <p class="q">1. 下面程式會印出什麼？</p>
+        <pre class="py">
+print(1 + 1)
+</pre>
+        <ol class="options">
+          <li data-key="A">2</li>
+          <li data-key="B">11</li>
+          <li data-key="C">1 + 1</li>
+          <li data-key="D">Error</li>
+        </ol>
+        <p class="explain">解析：數字相加</p>
+      </div>
+
+      <nav class="pager"></nav>
+    </article>
+  </div>
+
+  <footer>
+    <div class="container">PCEP Python 入門講義</div>
+  </footer>
+
+  <script src="../data/lessons.js"></script>
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>
